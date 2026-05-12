@@ -125,7 +125,7 @@ export default function App() {
           id="youtube"
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, amount: 0.1 }}
           variants={STAGGER_CHILDREN}
           className="grid md:grid-cols-[1fr_2fr] gap-12 border-t border-white/10 pt-16"
         >
@@ -209,7 +209,7 @@ export default function App() {
           id="about"
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, amount: 0.1 }}
           variants={STAGGER_CHILDREN}
           className="grid md:grid-cols-[1fr_2fr] gap-12 border-t border-white/10 pt-16"
         >
@@ -234,7 +234,7 @@ export default function App() {
           id="experience"
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, amount: 0.1 }}
           variants={STAGGER_CHILDREN}
           className="grid md:grid-cols-[1fr_2fr] gap-12 border-t border-white/10 pt-16"
         >
@@ -309,7 +309,7 @@ export default function App() {
         <motion.section 
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, amount: 0.1 }}
           variants={STAGGER_CHILDREN}
           className="grid md:grid-cols-[1fr_2fr] gap-12 border-t border-white/10 pt-16"
         >
@@ -357,7 +357,7 @@ export default function App() {
         <motion.section 
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, amount: 0.1 }}
           variants={STAGGER_CHILDREN}
           className="grid md:grid-cols-[1fr_2fr] gap-12 border-t border-white/10 pt-16"
         >
@@ -392,7 +392,7 @@ export default function App() {
           id="work"
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, amount: 0.1 }}
           variants={STAGGER_CHILDREN}
           className="grid md:grid-cols-[1fr_2fr] gap-12 border-t border-white/10 pt-16"
         >
