@@ -27,7 +27,19 @@ const STAGGER_CHILDREN = {
   show: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
 
+const YOUTUBE_VIDEOS = ['9Q4eyWnOzVE', '5HUC_0cgcRs', 'a8MzTj9ORi4', 'oZZ1tGJRlwA', 'DLUwFIXHc6M'];
+const YOUTUBE_SHORTS = ['2RBQU9rcfrM', 'DeFWp6Q_yPw', 'ADjC12rQ2qw', '6O5y_7C78Pg', 'bR2R6sDezBw'];
+
 export default function App() {
+  const [videoIndex, setVideoIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setVideoIndex((prev) => (prev + 1) % YOUTUBE_VIDEOS.length);
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="min-h-screen bg-black text-[#EDEDED] font-sans selection:bg-indigo-500/30">
       
@@ -127,46 +139,67 @@ export default function App() {
             </a>
           </motion.div>
           
-          <motion.div variants={FADE_UP_ANIMATION_VARIANTS} className="grid sm:grid-cols-2 gap-4">
-            {/* Card 1 */}
-            <div className="rounded-xl overflow-hidden border border-white/10 bg-[#111] group">
-              <div className="aspect-video bg-neutral-900 relative">
-                <iframe 
-                  className="w-full h-full absolute inset-0"
-                  src="https://www.youtube.com/embed?listType=user_uploads&list=georgescreativestudio" 
-                  title="YouTube video player" 
-                  frameBorder="0" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                  allowFullScreen
-                ></iframe>
-              </div>
-              <div className="p-4">
-                <h3 className="font-medium text-white text-sm">Latest Uploads</h3>
-                <p className="text-xs text-neutral-500 mt-1">George's Creative Studio</p>
-              </div>
-            </div>
-            
-            {/* Card 2 : Placeholder for another specific video */}
-            <div className="rounded-xl overflow-hidden border border-white/10 bg-[#111] group">
-              <div className="aspect-video bg-neutral-800 relative flex items-center justify-center">
-                 <iframe 
-                  className="w-full h-full absolute inset-0"
-                  src="https://www.youtube.com/embed/videoseries?list=UU[CHANNEL_ID_HERE]" 
-                  title="YouTube video player" 
-                  frameBorder="0" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                  allowFullScreen
-                ></iframe>
-                {/* Fallback overlay in case playlist fails */}
-                <div className="z-10 text-center px-4 pointer-events-none">
-                  <Youtube className="w-8 h-8 text-white/20 mx-auto mb-2" />
-                  <p className="text-xs text-white/50 text-center">Video Preview</p>
+          <motion.div variants={FADE_UP_ANIMATION_VARIANTS}>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {/* Card 1 */}
+              <div className="rounded-xl overflow-hidden border border-white/10 bg-[#111] group">
+                <div className="aspect-video bg-neutral-900 relative">
+                  <iframe 
+                    key={YOUTUBE_VIDEOS[videoIndex]}
+                    className="w-full h-full absolute inset-0"
+                    src={`https://www.youtube.com/embed/${YOUTUBE_VIDEOS[videoIndex]}?autoplay=0`}
+                    title="YouTube video player 1" 
+                    frameBorder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowFullScreen
+                  ></iframe>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-medium text-white text-sm">Latest Uploads</h3>
+                  <p className="text-xs text-neutral-500 mt-1">George's Creative Studio</p>
                 </div>
               </div>
-              <div className="p-4">
-                <h3 className="font-medium text-white text-sm">Featured Content</h3>
-                <p className="text-xs text-neutral-500 mt-1">Design & Creativity Showcases</p>
+              
+              {/* Card 2 : Placeholder for another specific video */}
+              <div className="rounded-xl overflow-hidden border border-white/10 bg-[#111] group">
+                <div className="aspect-video bg-neutral-800 relative flex items-center justify-center">
+                   <iframe 
+                    key={YOUTUBE_VIDEOS[(videoIndex + 1) % YOUTUBE_VIDEOS.length]}
+                    className="w-full h-full absolute inset-0"
+                    src={`https://www.youtube.com/embed/${YOUTUBE_VIDEOS[(videoIndex + 1) % YOUTUBE_VIDEOS.length]}?autoplay=0`}
+                    title="YouTube video player 2" 
+                    frameBorder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowFullScreen
+                  ></iframe>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-medium text-white text-sm">Featured Content</h3>
+                  <p className="text-xs text-neutral-500 mt-1">Design & Creativity Showcases</p>
+                </div>
               </div>
+            </div>
+
+            {/* Shorts */}
+            <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-4">
+              {[0, 1, 2].map((offset) => {
+                const shortIndex = (videoIndex + offset) % YOUTUBE_SHORTS.length;
+                return (
+                  <div key={`short-${offset}`} className="rounded-xl overflow-hidden border border-white/10 bg-[#111] group">
+                    <div className="aspect-[9/16] bg-neutral-900 relative">
+                      <iframe 
+                        key={YOUTUBE_SHORTS[shortIndex]}
+                        className="w-full h-full absolute inset-0 rounded-xl"
+                        src={`https://www.youtube.com/embed/${YOUTUBE_SHORTS[shortIndex]}?autoplay=0`}
+                        title={`YouTube short player ${offset + 1}`}
+                        frameBorder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </motion.div>
         </motion.section>
@@ -188,7 +221,10 @@ export default function App() {
               I am a Senior Graphic Design Specialist with over 10 years of experience managing graphic design projects from inception to execution. My expertise lies in creating compelling visual stories, whether through detailed infographics, impactful presentations, or high-end marketing collateral.
             </p>
             <p>
-              I am certified in modern Adobe AI software, including Adobe Firefly and Adobe Aero for Augmented Reality. I have extensive experience in leading design teams, refining workflows, and collaborating across organizations to drive digital creativity standards.
+              My passion for emerging technologies has led me to deeply integrate Artificial Intelligence into my creative workflow. I hold specialized certifications in <strong className="text-white font-medium">AI Essentials</strong> from the appliedAI Institute, as well as <strong className="text-white font-medium">Generative AI</strong> and <strong className="text-white font-medium">Augmented Reality</strong> credentials from Adobe (such as Adobe Firefly and Adobe Aero). I leverage generative AI to push the boundaries of digital content creation, streamline artistic workflows, and deliver innovative visual concepts.
+            </p>
+            <p>
+              Beyond my professional roles, I am the creator behind <strong className="text-white font-medium">George's Creative Studio</strong> on YouTube. My channel is a space where I share my creative journey, offering innovative DIY projects, inspiring art tutorials, and design showcases. I am passionate about building a community of dreamers and creators to explore the endless possibilities of creativity together.
             </p>
           </motion.div>
         </motion.section>
