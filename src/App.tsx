@@ -48,11 +48,11 @@ export default function App() {
         <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
           <span className="font-heading font-semibold text-base tracking-tight text-white flex items-center gap-2">
             <img 
-              src="/george.jpeg" 
+              src="https://raw.githubusercontent.com/GeorgekuttyMC-bit/GeorgekuttyMC-Portfolio-/main/public/george.jpeg" 
               alt="GC" 
               className="w-6 h-6 rounded-full object-cover" 
               onError={(e) => {
-                e.currentTarget.src = "/george.jpg";
+                e.currentTarget.src = "https://raw.githubusercontent.com/GeorgekuttyMC-bit/GeorgekuttyMC-Portfolio-/main/public/george.jpg";
               }}
             />
             <div className="hidden w-6 h-6 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 items-center justify-center text-[10px] font-bold text-white">GC</div>
@@ -115,11 +115,11 @@ export default function App() {
             <div className="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-[#111] shadow-2xl relative z-10 bg-neutral-900 group">
               {/* Fallback image utilizing UI-Avatars for immediate display, but users should upload their own */}
               <img 
-                src="/george.jpeg"
+                src="https://raw.githubusercontent.com/GeorgekuttyMC-bit/GeorgekuttyMC-Portfolio-/main/public/george.jpeg"
                 alt="Georgekutty M. Cherian" 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 onError={(e) => {
-                  e.currentTarget.src = "/george.jpg";
+                  e.currentTarget.src = "https://raw.githubusercontent.com/GeorgekuttyMC-bit/GeorgekuttyMC-Portfolio-/main/public/george.jpg";
                 }}
               />
             </div>
@@ -222,7 +222,17 @@ export default function App() {
           className="grid md:grid-cols-[1fr_2fr] gap-12 border-t border-white/10 pt-16"
         >
           <motion.div variants={FADE_UP_ANIMATION_VARIANTS}>
-            <h2 className="text-2xl font-heading font-semibold text-white">About Me</h2>
+            <h2 className="text-2xl font-heading font-semibold text-white mb-8">About Me</h2>
+            <div className="w-full aspect-square md:w-48 md:h-48 rounded-2xl overflow-hidden border border-white/10 shadow-2xl relative mb-6">
+              <img 
+                src="https://raw.githubusercontent.com/GeorgekuttyMC-bit/GeorgekuttyMC-Portfolio-/main/public/george.jpeg"
+                alt="Georgekutty M. Cherian" 
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                onError={(e) => {
+                  e.currentTarget.src = "https://raw.githubusercontent.com/GeorgekuttyMC-bit/GeorgekuttyMC-Portfolio-/main/public/george.jpg";
+                }}
+              />
+            </div>
           </motion.div>
           <motion.div variants={FADE_UP_ANIMATION_VARIANTS} className="space-y-6 text-neutral-300 text-lg leading-relaxed font-light">
             <p>
